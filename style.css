@@ -9,6 +9,9 @@ body {
     justify-content: center;
     background-color: black;
     color: white;
+    min-width: 750px;
+    overflow-x: hidden;
+    overflow-y: visible;
 }
 
 .container {
@@ -16,7 +19,7 @@ body {
     width: 30%;
     height: 100%;
     flex-direction: column;
-    
+    align-items: center;
 }
 
 .top-layout {
@@ -24,6 +27,7 @@ body {
     padding: 1rem 0;
     justify-content: space-between;
     margin-bottom: 1rem;
+    width: 450px;
 }
 
 .x-score,
@@ -87,7 +91,7 @@ body {
 
 .guide-text p {
     margin: 0;
-    font-size: larger;
+    font-size: xx-large;
     text-shadow: 0 0 10px white;
 }
 
@@ -120,6 +124,8 @@ body {
 
 .bottom-layout {
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .reset-button {
@@ -129,5 +135,40 @@ body {
     box-shadow: 0 0 10px red;
     text-shadow: 0 0 10px white;
     border-radius: 3px;
-    padding: 1rem;
+    padding: 1rem 4rem;
+    font-size: large;
+    justify-self: left;
+}
+
+.reset-button:hover {
+    animation: flicker 0.25s;
+    background-color: red;
+    cursor: pointer;
+}
+
+@keyframes flicker {
+    0% {background-color: red;}
+    20% {background-color: red;}
+    25% {background-color: transparent;}
+    70% {background-color: transparent;}
+    75% {background-color: red;}
+}
+
+a {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    height: 50px;
+    margin: auto;
+}
+
+a img {
+    width: 50px;
+    border-radius: 50%;
+    transition: transform 0.1s ease-in-out;
+}
+
+a img:hover {
+    transform: scale(1.2) rotate(5deg);
+    cursor: pointer;
 }
