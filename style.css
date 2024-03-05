@@ -114,9 +114,6 @@ body {
     justify-content: center;
     border: 1.5px rgb(0, 255, 255) solid;
     box-shadow: 0 0 10px rgb(0, 255, 255);
-}
-
-.grid div p {
     margin: 0;
     font-size: 5rem;
     text-shadow: 0 0 10px white;
