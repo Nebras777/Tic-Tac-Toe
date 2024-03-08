@@ -3,17 +3,33 @@ const GameBoard = (() => {
 
     const setTile = (index, tile) => {
         gameBoardArray[index] = tile
+        console.log(gameBoardArray)
     }
 
     const getTile = (index) => {
         return gameBoardArray[index]
     }
+
+    return {setTile, getTile}
 })()
 
 const DisplayControl = (() => {
-    const gridItems = document.querySelectorAll('.grid div')
+    const gridItems = document.querySelectorAll('.grid > div')
     const guideText = document.querySelector('.guide-text')
     const resetButton = document.querySelector('.reset-button')
+
+    gridItems.forEach((item) => item.addEventListener('click', (e) => {
+        GameControl.inputTile(e.target.dataset.index)
+    }))
+
+    const displayTiles = () => {
+        for (let i = 0; i <9; i++) {
+            let targetDiv = gridItems[i]
+            targetDiv.textContent = GameBoard.getTile(i)
+        }
+    }
+
+    return {displayTiles}
 })()
 
 const GameControl = (() => {
@@ -30,7 +46,13 @@ const GameControl = (() => {
         }
     }
 
-    return {tileSwitch, currentTile}
+    const inputTile = (index) => {
+        GameBoard.setTile(index, currentTile)
+        DisplayControl.displayTiles()
+        tileSwitch()
+    }
+
+    return {tileSwitch, currentTile, inputTile}
 })()
 
 function Player(tile) {
