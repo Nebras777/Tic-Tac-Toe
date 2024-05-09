@@ -23,11 +23,15 @@ const GameBoard = (() => {
 })()
 
 const DisplayControl = (() => {
+    const gridFull = document.querySelector('.grid')
     const gridItems = document.querySelectorAll('.grid > div')
     const guideText = document.querySelector('.guide-text > p')
     const resetButton = document.querySelector('.reset-button')
     const XScore = document.querySelector('#x-score')
     const OScore = document.querySelector('#o-score')
+
+    gridFull.classList.add('grid-blue')
+    gridItems.forEach((item) => item.classList.add('grid-blue'))
 
     gridItems.forEach((item) => item.addEventListener('click', (e) => {
         if (e.target.textContent !== "" || GameControl.isGameOver()) return
@@ -43,12 +47,16 @@ const DisplayControl = (() => {
 
     const guideTextControl = (tile) => {
         if (tile == "X") {
+            gridColorSwitch("X")
             guideText.textContent = `X WINS!`
         } else if (tile == "O") {
+            gridColorSwitch("O")
             guideText.textContent = `O WINS!`
         } else if (tile == "!") {
+            gridColorSwitch("!")
             guideText.textContent = "TIE!"
         } else {
+            gridColorSwitch()
             guideText.textContent = `${GameControl.getCurrentTile()}'s Turn`
         }
     }
@@ -65,6 +73,49 @@ const DisplayControl = (() => {
     const updateScores = () => {
         XScore.textContent = GameControl.getScore("X")
         OScore.textContent = GameControl.getScore("O")
+    }
+
+    const blueGrid = () => {
+        gridFull.classList.add('grid-blue')
+        gridFull.classList.remove('grid-pink')
+        gridFull.classList.remove('grid-white')
+        gridItems.forEach((item) => {
+            item.classList.add('grid-blue')
+            item.classList.remove('grid-pink')
+            item.classList.remove('grid-white')
+        })
+    }
+
+    const pinkGrid = () => {
+        gridFull.classList.add('grid-pink')
+        gridFull.classList.remove('grid-blue')
+        gridFull.classList.remove('grid-white')
+        gridItems.forEach((item) => {
+            item.classList.add('grid-pink')
+            item.classList.remove('grid-blue')
+            item.classList.remove('grid-white')
+        })
+    }
+
+    const whiteGrid = () => {
+        gridFull.classList.remove('grid-blue')
+        gridFull.classList.remove('grid-pink')
+        gridFull.classList.add('grid-white')
+        gridItems.forEach((item) => {
+            item.classList.add('grid-white')
+            item.classList.remove('grid-blue')
+            item.classList.remove('grid-pink')
+        })
+    }
+
+    const gridColorSwitch = (color) => {
+        if ((color == undefined && GameControl.getCurrentTile() == "O") || color == "O") {
+            pinkGrid()
+        } else if ((color == undefined && GameControl.getCurrentTile() == "X") || color == "X"){
+            blueGrid()
+        } else if (color == "!") {
+            whiteGrid()
+        }
     }
 
     resetButton.addEventListener('click', clearTiles)
@@ -152,7 +203,7 @@ const GameControl = (() => {
         winCheck()
     }
 
-    return {getCurrentTile, tileSwitch, setGameStatus,getScore, inputTile, isGameOver}
+    return {getCurrentTile, tileSwitch, setGameStatus, getScore, inputTile, isGameOver}
 })()
 
 function Player(tile) {

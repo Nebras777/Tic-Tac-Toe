@@ -99,12 +99,25 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 150px);
     grid-template-rows: repeat(3, 150px);
-    border: 1.5px rgb(0, 255, 255) solid;
-    box-shadow: 0 0 10px rgb(0, 255, 255);
     width: 450px;
     align-self: center;
     margin-bottom: 2rem;
     cursor: pointer;
+}
+
+.grid-blue {
+    border: 1.5px rgb(0, 255, 255) solid;
+    box-shadow: 0 0 10px rgb(0, 255, 255);
+}
+
+.grid-pink {
+    border: 1.5px rgb(255, 0, 255) solid;
+    box-shadow: 0 0 10px rgb(255, 0, 255);
+}
+
+.grid-white {
+    border: 1.5px rgb(255, 255, 255) solid;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
 }
 
 .grid > div {
@@ -113,8 +126,6 @@ body {
     align-items: center;
     height: 150px;
     justify-content: center;
-    border: 1.5px rgb(0, 255, 255) solid;
-    box-shadow: 0 0 10px rgb(0, 255, 255);
     margin: 0;
     font-size: 5rem;
     text-shadow: 0 0 10px white;
