@@ -65,6 +65,10 @@ const DisplayControl = (() => {
         for (let i = 0; i < 9; i++) {
             GameBoard.setTile(i, "")
         }
+        gridItems.forEach((item) => {
+            item.classList.remove('background-blue')
+            item.classList.remove('background-pink')
+        })
         displayTiles()
         guideTextControl("")
         GameControl.setGameStatus(false)
@@ -118,9 +122,21 @@ const DisplayControl = (() => {
         }
     }
 
+    const winBackground = (array, color) => {
+        if (color == 'blue') {
+            for (let i = 0; i < 3; i++) {
+                gridItems[array[i]].classList.add('background-blue')
+            }
+        } else {
+            for (let i = 0; i < 3; i++) {
+                gridItems[array[i]].classList.add('background-pink')
+            }
+        }
+    }
+
     resetButton.addEventListener('click', clearTiles)
 
-    return {displayTiles, guideTextControl, updateScores}
+    return {displayTiles, guideTextControl, updateScores, winBackground}
 })()
 
 const GameControl = (() => {
@@ -172,12 +188,14 @@ const GameControl = (() => {
                 DisplayControl.guideTextControl("X")
                 playerX.playerWin()
                 DisplayControl.updateScores()
+                DisplayControl.winBackground(winningCombos[i], 'blue')
                 break
             } else if (check(currentO, winningCombos[i])) {
                 gameOver = true
                 DisplayControl.guideTextControl("O")
                 playerO.playerWin()
                 DisplayControl.updateScores()
+                DisplayControl.winBackground(winningCombos[i], 'pink')
                 break
             } else if ((currentX.length + currentO.length == 9) && (!check(currentX, winningCombos[i])) && (!check(currentO, winningCombos[i]))) {
                 gameOver = true
